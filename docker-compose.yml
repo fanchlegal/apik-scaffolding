@@ -1,0 +1,47 @@
+version: '2.4'
+services:
+
+    db:
+        image: postgres:10.6
+        environment:
+            POSTGRES_USER: odoo
+            POSTGRES_PASSWORD: odoo
+            POSTGRES_DB: postgres
+            PGDATA: /var/lib/postgresql/data/pgdata
+        volumes:
+            - db:/var/lib/postgresql/data/pgdata
+
+    odoo:
+        image: apik/odoo-saas:13.0-enterprise
+        ports:
+            - "8069:8069"        
+        tty: true
+        stdin_open: true
+        environment:
+            PGDATABASE: dev
+            WAIT_PG: 'true'
+            LIST_DB: 'true'
+            UNACCENT: 'true'
+            LOG_LEVEL: 'debug'
+            # Odoo-saas
+            FIXDBS: 'false'
+            SERVER_MODE: Dev
+            SERVER_WIDE_MODULES: base,web,server_mode,saas_client
+            # Custom config
+            CUSTOM_CONFIG: |-
+                [options]
+            # Custom requirements.txt
+            CUSTOM_REQUIREMENTS: |-
+                # custom pip libraries
+        volumes:
+            - ./repositories:/home/odoo/custom/repositories:rw,z
+            - filestore:/home/odoo/data
+            # Timezone from host
+            - /etc/timezone:/etc/timezone:ro
+            - /etc/localtime:/etc/localtime:ro
+        depends_on:
+            - db
+
+volumes:
+    db:
+    filestore:
