@@ -18,7 +18,7 @@ services:
         tty: true
         stdin_open: true
         environment:
-            PGDATABASE: dev
+            #PGDATABASE: dev
             WAIT_PG: 'true'
             LIST_DB: 'true'
             UNACCENT: 'true'
