@@ -35,10 +35,7 @@ services:
                 # custom pip libraries
             CUSTOM_ENTRYPOINT: |-
                 #!/bin/bash
-                find_py() {
-                    find -name '*.py' -exec grep $1 {} \; -print
-                }
-                alias f_py=find_py
+              
 
         volumes:
             - ./repositories:/home/odoo/custom/repositories:rw,z
