@@ -22,7 +22,7 @@ services:
             WAIT_PG: 'true'
             LIST_DB: 'true'
             UNACCENT: 'true'
-            LOG_LEVEL: 'debug'
+            LOG_LEVEL: 'info'
             # Odoo-saas
             FIXDBS: 'false'
             SERVER_MODE: Dev
