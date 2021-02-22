@@ -2,6 +2,7 @@ version: '2.4'
 services:
 
     db:
+        platform: linux/x86_64
         image: postgres:10.6
         environment:
             POSTGRES_USER: odoo
@@ -12,6 +13,7 @@ services:
             - db:/var/lib/postgresql/data/pgdata
 
     odoo:
+        platform: linux/x86_64
         image: apik/odoo-saas:13.0-enterprise
         ports:
             - "8069:8069"        
